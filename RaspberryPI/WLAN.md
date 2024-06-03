@@ -1,4 +1,4 @@
-# EinrichtungRaspberry Pi OS Bookworm
+# Einrichtung Raspberry Pi OS Bookworm
 Diese Anleitung beschreibt, wie man das Raspberry Pi OS grundlegend einrichtet.
 
 ## Voraussetzungen
@@ -17,7 +17,9 @@ Diese Anleitung beschreibt, wie man das Raspberry Pi OS grundlegend einrichtet.
 ### 2. WLAN und SSH für den ersten Start einrichten
 Nachdem das Image auf die microSD-Karte geschrieben wurde, entfernen Sie die microSD-Karte sicher und stecken Sie sie erneut in Ihren Computer ein. Es sollten nun zwei Laufwerke erscheinen, eines davon mit dem Namen boot.
 
-##### 1. WLAN-Konfiguration:
+##### 1. Headless-Setup (ohne Monitor und Tastatur)
+
+1. WLAN aktivieren
 
 Erstellen Sie eine Datei mit dem Namen wpa_supplicant.conf im boot Verzeichnis der microSD-Karte und fügen Sie den folgenden Inhalt ein:
 
@@ -35,10 +37,8 @@ network={
 
 Ersetzen Sie YOUR_SSID durch den Namen Ihres WLANs und YOUR_PASSWORD durch Ihr WLAN-Passwort.
 
-##### 2. SSH aktivieren:
-Um SSH auf dem Raspberry Pi zu aktivieren, können Sie die folgenden Schritte ausführen. Diese Methode funktioniert sowohl für ein Headless-Setup (ohne Monitor und Tastatur) als auch für ein Setup mit angeschlossenem Monitor und Tastatur.
+2. SSH aktivieren:
 
-##### 1. Headless-Setup (ohne Monitor und Tastatur)
 Erstellen Sie eine leere Datei mit dem Namen ssh (ohne Dateierweiterung) im boot Verzeichnis der microSD-Karte. Diese Datei signalisiert dem Raspberry Pi beim Booten, dass der SSH-Dienst aktiviert werden soll.
 
 Unter Windows:
@@ -62,14 +62,37 @@ Erstellen Sie die ssh Datei:
 touch ssh
 ```
 
+* Entfernen Sie die microSD-Karte sicher von Ihrem Computer und stecken Sie sie in den Raspberry Pi.
+* Schließen Sie das Netzteil an den Raspberry Pi an und schalten Sie ihn ein.
+* Der Raspberry Pi sollte sich nun mit Ihrem WLAN verbinden und der SSH-Dienst sollte aktiviert sein.
+
 ##### 2. Setup mit Monitor und Tastatur
+
+* Entfernen Sie die microSD-Karte sicher von Ihrem Computer und stecken Sie sie in den Raspberry Pi.
+* Schließen Sie das Netzteil an den Raspberry Pi an und schalten Sie ihn ein.
 * Melden Sie sich mit dem Standardbenutzer *pi* und dem Passwort *raspberry* an.
+* Nach dem Starten des Betriebssystems sehen Sie die Desktop-Oberfläche.
+
+1. WLAN einrichten
+
+* Klicken Sie auf das Netzwerksymbol (meistens in der oberen rechten Ecke der Taskleiste).
+* Eine Liste der verfügbaren WLAN-Netzwerke wird angezeigt.
+* Wählen Sie Ihr WLAN-Netzwerk aus der Liste aus.
+* Geben Sie das Passwort für Ihr WLAN-Netzwerk ein und klicken Sie auf "Verbinden".
+
+Verbindung bestätigen:
+
+* Nach erfolgreicher Verbindung sollte das Netzwerksymbol anzeigen, dass der Raspberry Pi mit dem WLAN verbunden ist.
+
+2. SSH aktivieren
+
 * Öffnen Sie ein Terminal und geben Sie den folgenden Befehl ein, um den SSH-Dienst zu aktivieren:
   
 ```
 sudo raspi-config
 ```
 Navigieren Sie zu Interfacing Options > SSH und wählen Sie Enable.
+
 Alternativ können Sie SSH direkt im Terminal aktivieren, ohne raspi-config zu verwenden:
 
 ```
@@ -77,10 +100,6 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 ```
 
-### 3. Raspberry Pi starten
-1. Entfernen Sie die microSD-Karte sicher von Ihrem Computer und stecken Sie sie in den Raspberry Pi.
-2. Schließen Sie das Netzteil an den Raspberry Pi an und schalten Sie ihn ein.
-3. Der Raspberry Pi sollte sich nun mit Ihrem WLAN verbinden und der SSH-Dienst sollte aktiviert sein.
    
 ### 4. Verbindung zum Raspberry Pi herstellen
 1. Finden Sie die IP-Adresse Ihres Raspberry Pi. Dies kann über Ihren Router oder mit einem Netzwerk-Scanner wie nmap erfolgen.
