@@ -74,7 +74,7 @@ Alternativ können Sie SSH direkt im Terminal aktivieren, ohne raspi-config zu v
 
 ```
 sudo systemctl enable ssh
-sudo systemctl start ssh#
+sudo systemctl start ssh
 ```
 
 ### 3. Raspberry Pi starten
