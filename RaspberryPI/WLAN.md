@@ -1,5 +1,5 @@
-# Headless WLAN Einrichtung auf Raspberry Pi OS Bookworm
-Diese Anleitung beschreibt, wie man das WLAN auf einem Raspberry Pi, der mit Raspberry Pi OS Bookworm läuft, ohne angeschlossenen Monitor oder Tastatur einrichtet.
+# EinrichtungRaspberry Pi OS Bookworm
+Diese Anleitung beschreibt, wie man das Raspberry Pi OS grundlegend einrichtet.
 
 ## Voraussetzungen
 * Raspberry Pi (alle Modelle mit WLAN-Unterstützung)
@@ -15,11 +15,9 @@ Diese Anleitung beschreibt, wie man das WLAN auf einem Raspberry Pi, der mit Ras
 4. Flashen Sie das Image auf die microSD-Karte.
 
 ### 2. WLAN und SSH für den ersten Start einrichten
-Nachdem das Image auf die microSD-Karte geschrieben wurde:
+Nachdem das Image auf die microSD-Karte geschrieben wurde, entfernen Sie die microSD-Karte sicher und stecken Sie sie erneut in Ihren Computer ein. Es sollten nun zwei Laufwerke erscheinen, eines davon mit dem Namen boot.
 
-1. Entfernen Sie die microSD-Karte sicher und stecken Sie sie erneut in Ihren Computer ein. Es sollten nun zwei Laufwerke erscheinen, eines davon mit dem Namen boot.
-
-2. WLAN-Konfiguration:
+##### 1. WLAN-Konfiguration:
 
 Erstellen Sie eine Datei mit dem Namen wpa_supplicant.conf im boot Verzeichnis der microSD-Karte und fügen Sie den folgenden Inhalt ein:
 
@@ -37,9 +35,47 @@ network={
 
 Ersetzen Sie YOUR_SSID durch den Namen Ihres WLANs und YOUR_PASSWORD durch Ihr WLAN-Passwort.
 
-3. SSH aktivieren:
+##### 2. SSH aktivieren:
+Um SSH auf dem Raspberry Pi zu aktivieren, können Sie die folgenden Schritte ausführen. Diese Methode funktioniert sowohl für ein Headless-Setup (ohne Monitor und Tastatur) als auch für ein Setup mit angeschlossenem Monitor und Tastatur.
 
-Erstellen Sie eine leere Datei mit dem Namen ssh im boot Verzeichnis der microSD-Karte. Dies aktiviert den SSH-Dienst beim ersten Start.
+##### 1. Headless-Setup (ohne Monitor und Tastatur)
+Erstellen Sie eine leere Datei mit dem Namen ssh (ohne Dateierweiterung) im boot Verzeichnis der microSD-Karte. Diese Datei signalisiert dem Raspberry Pi beim Booten, dass der SSH-Dienst aktiviert werden soll.
+
+Unter Windows:
+
+* Öffnen Sie den Datei-Explorer.
+* Navigieren Sie zum boot Verzeichnis der microSD-Karte.
+* Rechtsklicken Sie in das Verzeichnis, wählen Sie Neu > Textdokument, benennen Sie es in ssh um und löschen Sie die .txt Erweiterung.
+
+Unter macOS oder Linux:
+
+* Öffnen Sie ein Terminal.
+* Navigieren Sie zum boot Verzeichnis der microSD-Karte, z.B.:
+
+```
+cd /Volumes/boot
+```
+
+Erstellen Sie die ssh Datei:
+
+```
+touch ssh
+```
+
+##### 2. Setup mit Monitor und Tastatur
+* Melden Sie sich mit dem Standardbenutzer *pi* und dem Passwort *raspberry* an.
+* Öffnen Sie ein Terminal und geben Sie den folgenden Befehl ein, um den SSH-Dienst zu aktivieren:
+  
+```
+sudo raspi-config
+```
+Navigieren Sie zu Interfacing Options > SSH und wählen Sie Enable.
+Alternativ können Sie SSH direkt im Terminal aktivieren, ohne raspi-config zu verwenden:
+
+```
+sudo systemctl enable ssh
+sudo systemctl start ssh#
+```
 
 ### 3. Raspberry Pi starten
 1. Entfernen Sie die microSD-Karte sicher von Ihrem Computer und stecken Sie sie in den Raspberry Pi.
