@@ -2630,3 +2630,6 @@
 05.06.2024 00:50:37 ERROR: DHT Runtime Exception: Checksum did not validate. Try again.
 05.06.2024 00:50:58 ERROR: DHT Runtime Exception: A full buffer was not returned. Try again.
 05.06.2024 00:53:24 ERROR: DHT Runtime Exception: Checksum did not validate. Try again.
+05.06.2024 00:59:17 ERROR: DHT Runtime Exception: A full buffer was not returned. Try again.
+05.06.2024 01:00:09 ERROR: DHT Runtime Exception: A full buffer was not returned. Try again.
+05.06.2024 01:02:25 ERROR: DHT Runtime Exception: Checksum did not validate. Try again.
