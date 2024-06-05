@@ -36,9 +36,10 @@ class KasaClass:
             sleep(10)
             await self.turn_off()
 
+SMARTPLUGIP = "192.168.0.1"
 async def main():
     print("Looking for SmartPlug")
-    plug = KasaClass("192.168.0.5")
+    plug = KasaClass(SMARTPLUGIP)
     await plug.update()
     if plug.is_off():
         print("Turning device on")
