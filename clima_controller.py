@@ -13,6 +13,9 @@ from dht_class import DHTClass
 
 # Config
 SMARTPLUGIP = "192.168.0.5"
+THRESTEMPERATUR = 27
+THRESHUMIDITY = 70
+FANEXECUTIONTIME = 1800
 
 # returns the current timestamp
 def get_timestamp():
@@ -73,9 +76,9 @@ async def main():
             display.draw_text_with_header("Temp. Luft.",human_readable)
 
             # activate plug if needed for 30 minutes
-            if temperature > 27 or humidity > 70:
+            if temperature > THRESTEMPERATUR or humidity > THRESHUMIDITY:
                 if curr_timestamp >= wait_until:
-                    wait_until = get_timestamp() + 1800
+                    wait_until = get_timestamp() + FANEXECUTIONTIME
 					
                 if not plug.is_on():
                     await plug.turn_on()	
